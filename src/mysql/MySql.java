@@ -12,15 +12,15 @@ public class MySql implements AutoCloseable {
     private String password = MySqlConfiguration.getPassWord();
     private String databaseName = MySqlConfiguration.getDatabaseName();
 
-    private String useSSL = MySqlConfiguration.getUseSSL();
-    private String autoReconnect = MySqlConfiguration.getAutoConnect();
+    private boolean useSSL = MySqlConfiguration.getUseSSL();
+    private boolean autoReconnect = MySqlConfiguration.getAutoConnect();
 
-    private String jdbcUrl = "jdbc:mysql://" + hostName + "/" + databaseName + "?autoReconnect=" + autoReconnect + "&useSSL=" + useSSL;
+    private String jdbcUri = createJdbcUri();
 
     private Connection connection;
 
     public MySql() throws SQLException {
-        connection = DriverManager.getConnection(jdbcUrl, userName, password);
+        connection = DriverManager.getConnection(jdbcUri, userName, password);
     }
 
     public ResultSet executeQuery(String sql) throws SQLException {
@@ -48,7 +48,7 @@ public class MySql implements AutoCloseable {
     }
 
     public String getJdbcUrl() {
-        return jdbcUrl;
+        return jdbcUri;
     }
 
     public void close() {
@@ -56,5 +56,25 @@ public class MySql implements AutoCloseable {
             connection.close();
         }
         catch (SQLException ignore) {}
+    }
+
+    private String createJdbcUri() {
+        StringBuilder sb = new StringBuilder("jdbc:mysql://");
+        sb.append(hostName).append("/");
+        sb.append(databaseName).append("?");
+
+        if (useSSL) {
+            sb.append("useSSL=").append(useSSL).append("&");
+            sb.append("requireSSL=true&");
+            sb.append("verifyServerCertificate=true");
+            sb.append("trustCertificateKeyStoreUrl=").append("file");
+            sb.append("trustCertificateKeyStoreType=").append("JKS");
+            sb.append("trustCertificateKeyStorePassword=").append("YOUR_JKS_PASSWORD");
+        }
+        if (autoReconnect) {
+            sb.append("autoReconnect=").append(autoReconnect).append("&");
+        }
+
+        return sb.toString();
     }
 }

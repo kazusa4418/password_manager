@@ -12,7 +12,7 @@ echo_error() {
 run_new() {
     if ! [[ $1 = '' ]] ; then
         cd out/production/PasswordManager/
-        java test $1
+        java -classpath lib/mysql-connector-java-8.0.12/mysql-connector-java-8.0.12.jar:./ test $1
     else
         echo_error 'new'
     fi

@@ -11,7 +11,8 @@ public class test {
 
         String password = inputPassword();
 
-        try (MySql mysql = new MySql()) {
+        try {
+            MySql mysql = new MySql();
             mysql.prepareStatement("INSERT INTO passwords VALUES(?, ?);")
                     .set(serviceName)
                     .set(password)
@@ -21,6 +22,16 @@ public class test {
             err.printStackTrace();
             System.exit(1);
         }
+//        try (MySql mysql = new MySql()) {
+//            mysql.prepareStatement("INSERT INTO passwords VALUES(?, ?);")
+//                    .set(serviceName)
+//                    .set(password)
+//                    .executeQuery();
+//        }
+//        catch (SQLException err) {
+//            err.printStackTrace();
+//            System.exit(1);
+//        }
 
         System.out.println("the password was recorded.");
     }

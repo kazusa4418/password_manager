@@ -56,11 +56,11 @@ class MySqlConfiguration {
         return databaseName;
     }
 
-    static String getUseSSL() {
-        return useSSL;
+    static boolean getUseSSL() {
+        return Boolean.valueOf(useSSL);
     }
 
-    static String getAutoConnect() {
-        return autoConnect;
+    static boolean getAutoConnect() {
+        return Boolean.valueOf(autoConnect);
     }
 }
