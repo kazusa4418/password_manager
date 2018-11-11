@@ -1,10 +1,9 @@
 package mysql;
 
-import util.JLogger;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import util.JLogger;
 import java.util.logging.Level;
 
 class MySqlConfiguration {
