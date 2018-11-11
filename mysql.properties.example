@@ -1,0 +1,6 @@
+hostName=database.example.com
+userName=example_user
+password=example_password
+databaseName=example_database_name
+useSSL=true
+autoReconnect=false
