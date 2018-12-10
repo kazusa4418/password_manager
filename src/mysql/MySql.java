@@ -61,18 +61,18 @@ public class MySql implements AutoCloseable {
     private String createJdbcUri() {
         StringBuilder sb = new StringBuilder("jdbc:mysql://");
         sb.append(hostName).append("/");
-        sb.append(databaseName).append("?");
+        sb.append(databaseName);
 
         if (useSSL) {
-            sb.append("useSSL=").append(useSSL).append("&");
-            sb.append("requireSSL=true&");
-            sb.append("verifyServerCertificate=true");
-            sb.append("trustCertificateKeyStoreUrl=").append("file");
-            sb.append("trustCertificateKeyStoreType=").append("JKS");
-            sb.append("trustCertificateKeyStorePassword=").append("YOUR_JKS_PASSWORD");
+            sb.append("&useSSL=").append(useSSL);
+            sb.append("&requireSSL=true");
+            sb.append("&verifyServerCertificate=true");
+            sb.append("&trustCertificateKeyStoreUrl=").append("file");
+            sb.append("&trustCertificateKeyStoreType=").append("JKS");
+            sb.append("&trustCertificateKeyStorePassword=").append("YOUR_JKS_PASSWORD");
         }
         if (autoReconnect) {
-            sb.append("autoReconnect=").append(autoReconnect).append("&");
+            sb.append("&autoReconnect=").append(autoReconnect);
         }
 
         return sb.toString();
