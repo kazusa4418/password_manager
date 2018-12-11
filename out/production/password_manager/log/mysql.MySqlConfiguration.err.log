@@ -1,0 +1,12 @@
+Dec 10, 2018 3:17:14 AM util.JLogger log
+SEVERE: mysql.properties is not found.
+java.io.FileNotFoundException: ./mysql.properties (No such file or directory)
+	at java.io.FileInputStream.open0(Native Method)
+	at java.io.FileInputStream.open(FileInputStream.java:195)
+	at java.io.FileInputStream.<init>(FileInputStream.java:138)
+	at mysql.PropertyReader.<init>(PropertyReader.java:16)
+	at mysql.MySqlConfiguration.loadMysqlProperties(MySqlConfiguration.java:24)
+	at mysql.MySqlConfiguration.<clinit>(MySqlConfiguration.java:18)
+	at mysql.MySql.<init>(MySql.java:10)
+	at test.main(test.java:15)
+
