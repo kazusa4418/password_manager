@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo_error() {
-    if [[ $1 = '' ]] ; then
+    if [[ $1 = '' ]]; then
         echo 'pw: missing operand'
     else
         echo "pw: missing operand after '$1'"
@@ -9,7 +9,7 @@ echo_error() {
 }
 
 run_command() {
-    if ! [[ $2 = '' ]] ; then
+    if ! [[ $2 = '' ]]; then
         cd out/production/password_manager/
         java -classpath lib/mysql-connector-java-8.0.12/mysql-connector-java-8.0.12.jar:./ $1 $2
     else

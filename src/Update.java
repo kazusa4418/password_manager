@@ -1,5 +1,3 @@
-import util.Console;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -20,7 +18,7 @@ public class Update extends Command {
                                     .executeQuery();
 
             if (!result.isBeforeFirst()) {
-                System.err.println("fatal: service '" + serviceName + "' is not recorded.");
+                console.println("fatal: service '" + serviceName + "' is not recorded.");
                 System.exit(1);
             }
         }
@@ -37,7 +35,7 @@ public class Update extends Command {
                     .set(service)
                     .executeUpdate();
 
-            System.out.println("the password was updated.");
+            console.println("the password was updated.");
         }
         catch (SQLException err) {
             err.printStackTrace();
@@ -46,14 +44,13 @@ public class Update extends Command {
     }
 
     private static String inputPassword(String serviceName) {
-        Console console = Console.getInstance();
-
         while (true) {
+            console.print("register the password for the service '" + serviceName + "'.");
             String pw = console.readPassword("Enter " + serviceName + " password: ");
             String again = console.readPassword("Retype " + serviceName + " password: ");
 
             if (!pw.equals(again)) {
-                System.out.println("Sorry, passwords do not match");
+                console.println("Sorry, passwords do not match");
                 continue;
             }
             return pw;
