@@ -41,7 +41,15 @@ public class Migrate {
 
         }
         catch (SQLException err) {
-            err.printStackTrace();
+            switch (err.getErrorCode()) {
+                case 1698:
+                    System.exit(1);
+                    break;
+                default:
+                    System.err.println("error code: " + err.getErrorCode());
+                    err.printStackTrace();
+                    break;
+            }
         }
         catch (IOException err) {
             err.printStackTrace();

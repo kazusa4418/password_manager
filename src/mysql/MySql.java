@@ -12,8 +12,8 @@ public class MySql implements AutoCloseable {
     private String password;
     private String databaseName;
 
-    private boolean useSSL = MySqlConfiguration.getUseSSL();
-    private boolean autoReconnect = MySqlConfiguration.getAutoConnect();
+    private boolean useSSL;
+    private boolean autoReconnect;
 
     private String jdbcUri = createJdbcUri();
 
@@ -34,6 +34,8 @@ public class MySql implements AutoCloseable {
         this.databaseName = databaseName;
         this.userName = userName;
         this.password = password;
+        this.useSSL = false;
+        this.autoReconnect = true;
         this.jdbcUri = createJdbcUri();
         this.connection = DriverManager.getConnection(jdbcUri, userName, password);
     }

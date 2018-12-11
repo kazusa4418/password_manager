@@ -49,6 +49,7 @@ else
         echo 'sorry, only Ubuntu and CentOS are supported.'
         exit
     fi
+    echo
     echo 'mysql installation was successfully completed!'
 fi
 
@@ -78,8 +79,14 @@ do
         fi
         java -classpath lib/mysql-connector-java-8.0.12/mysql-connector-java-8.0.12.jar:./ Migrate localhost ${username} ${password}
 
-        echo 'mysql set up was successfully completed!'
-        break
+        if [[ $? = 0 ]]; then
+            echo 'mysql set up was successfully completed!'
+            break
+        elif [[ $? = 1 ]]; then
+            echo 'error: Access denied for user root@localhost.'
+            echo 'fatal: Installation failed.'
+            exit
+        fi
     fi
 
     read -rp "error: please enter 'y' or 'n': " input;echo
