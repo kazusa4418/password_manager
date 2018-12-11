@@ -7,6 +7,8 @@ import util.JLogger;
 import java.util.logging.Level;
 
 class MySqlConfiguration {
+    private static String propertyFilePath;
+
     private static String hostName;
     private static String userName;
     private static String password;
@@ -14,12 +16,16 @@ class MySqlConfiguration {
     private static String useSSL;
     private static String autoConnect;
 
-    static {
+    static void setPropertyFilePath(String path) {
+        propertyFilePath = path;
+    }
+
+    static void load() {
         loadMysqlProperties();
     }
 
     private static void loadMysqlProperties() {
-        File file = new File("./mysql.properties");
+        File file = new File(propertyFilePath);
 
         try (PropertyReader reader = new PropertyReader(file)) {
             reader.load();

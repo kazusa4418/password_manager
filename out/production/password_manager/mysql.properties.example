@@ -1,0 +1,6 @@
+hostName=localhost
+userName=pw
+password=pw_admin
+databaseName=pw
+useSSL=false
+autoReconnect=false
