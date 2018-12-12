@@ -48,7 +48,7 @@ public class Migrate {
                 default:
                     System.err.println("error code: " + err.getErrorCode());
                     err.printStackTrace();
-                    break;
+                    System.exit(100);
             }
         }
         catch (IOException err) {

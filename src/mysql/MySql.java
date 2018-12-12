@@ -15,7 +15,7 @@ public class MySql implements AutoCloseable {
     private boolean useSSL;
     private boolean autoReconnect;
 
-    private String jdbcUri = createJdbcUri();
+    private String jdbcUri;
 
     private Connection connection;
 
@@ -30,6 +30,7 @@ public class MySql implements AutoCloseable {
     }
 
     public MySql(String hostName, String databaseName, String userName, String password) throws SQLException {
+        System.out.println(hostName);
         this.hostName = hostName;
         this.databaseName = databaseName;
         this.userName = userName;
@@ -106,20 +107,15 @@ public class MySql implements AutoCloseable {
     private String createJdbcUri() {
         StringBuilder sb = new StringBuilder("jdbc:mysql://");
         sb.append(hostName).append("/");
-        sb.append(databaseName);
 
-        if (useSSL) {
-            sb.append("&useSSL=").append(useSSL);
-            sb.append("&requireSSL=true");
-            sb.append("&verifyServerCertificate=true");
-            sb.append("&trustCertificateKeyStoreUrl=").append("file");
-            sb.append("&trustCertificateKeyStoreType=").append("JKS");
-            sb.append("&trustCertificateKeyStorePassword=").append("YOUR_JKS_PASSWORD");
-        }
-        if (autoReconnect) {
-            sb.append("&autoReconnect=").append(autoReconnect);
+        if (!databaseName.isEmpty()) {
+            sb.append(databaseName);
         }
 
+        sb.append("&useSSL=").append(useSSL);
+        sb.append("&autoReconnect=").append(autoReconnect);
+
+        System.out.println(sb.toString());
         return sb.toString();
     }
 }

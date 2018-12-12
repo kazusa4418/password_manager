@@ -83,9 +83,12 @@ do
             echo 'mysql set up was successfully completed!'
             break
         elif [[ $? = 1 ]]; then
-            echo 'error: Access denied for user root@localhost.'
-            echo 'fatal: Installation failed.'
+            echo "error: Access denied for user ${username}@localhost."
+            echo 'fatal: installation failed.'
             exit
+        else
+            echo 'an error occurred.'
+            echo 'fatal: installation failed.'
         fi
     fi
 
